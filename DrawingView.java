@@ -19,7 +19,7 @@ public class DrawingView extends View {
 
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
-    private int paintcolor = 0xFF660000;
+    private int paintcolor;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
     private float brushSize, lastBrushSize;
@@ -34,6 +34,7 @@ public class DrawingView extends View {
 
         drawPath = new Path();
         drawPaint = new Paint();
+        paintcolor = getResources().getColor(R.color.black);
         drawPaint.setColor(paintcolor);
 
         drawPaint.setAntiAlias(true);
@@ -110,10 +111,12 @@ public class DrawingView extends View {
     public void setErase (boolean isErase){
         erase = isErase;
         if(isErase){
-            drawPaint.setColor(getResources().getColor(R.color.white));
             drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+            //drawPaint.setColor(getResources().getColor(R.color.black));
+            //drawPaint.setXfermode(null);
         }else{
             //drawPaint.setColor(getResources().getColor(R.color.white));
+            //drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             drawPaint.setXfermode(null);
         }
     }

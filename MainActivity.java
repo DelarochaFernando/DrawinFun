@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDialog(String tool) {
 
+        int colorerase = getResources().getColor(R.color.white);
+        final String colorToErase = "white";
+        //final String colorToErase = String.valueOf(colorerase);
         final String toolSelected = tool;
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setContentView(R.layout.brush_chooser);
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             smallBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Dv.setErase(false);
+                    Dv.setErase(true);
                     //Dv.setColor("#FFFFFF");
                     Dv.setBrushSize(smallbrush);
                     Dv.setLastBrushSize(smallbrush);
@@ -130,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             mediumBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Dv.setErase(false);
+                    Dv.setErase(true);
                     //Dv.setColor("#FFFFFF");
                     Dv.setBrushSize(mediumbrush);
                     Dv.setLastBrushSize(mediumbrush);
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             largeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Dv.setErase(false);
+                    Dv.setErase(true);
                     //Dv.setColor("#FFFFFF");
                     Dv.setBrushSize(largebrush);
                     Dv.setLastBrushSize(largebrush);
@@ -158,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Dv.setErase(false);
-                    //Dv.setColor("#FFFFFF");
+                    Dv.setColor(colorToErase);
                     Dv.setBrushSize(smallbrush);
                     Dv.setLastBrushSize(smallbrush);
                     brushDialog.dismiss();
@@ -168,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Dv.setErase(false);
-                    //Dv.setColor("#FFFFFF");
+                    Dv.setColor(colorToErase);
                     Dv.setBrushSize(mediumbrush);
                     Dv.setLastBrushSize(mediumbrush);
                     brushDialog.dismiss();
@@ -178,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Dv.setErase(false);
-                    //Dv.setColor("#FFFFFF");
+                    Dv.setColor(colorToErase);
                     Dv.setBrushSize(largebrush);
                     Dv.setLastBrushSize(largebrush);
                     brushDialog.dismiss();
