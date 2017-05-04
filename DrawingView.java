@@ -23,6 +23,7 @@ public class DrawingView extends View {
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
     private float brushSize, lastBrushSize;
+    private boolean erase = false;
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context,attrs);
@@ -107,15 +108,18 @@ public class DrawingView extends View {
     }
 
     public void setErase (boolean isErase){
-
+        erase = isErase;
         if(isErase){
+            drawPaint.setColor(getResources().getColor(R.color.white));
             drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         }else{
+            //drawPaint.setColor(getResources().getColor(R.color.white));
             drawPaint.setXfermode(null);
         }
     }
 
     public void startNew() {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        invalidate();
     }
 }

@@ -1,6 +1,9 @@
 package com.example.jmata.drawinfun;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         Dv.setBrushSize(mediumbrush);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-        currPaint.setOnClickListener(new View.OnClickListener() {
+        /*currPaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageButton imgView = (ImageButton)v;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
                 currPaint = (ImageButton)v;
             }
-        });
+        });*/
 
         drawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,55 +70,123 @@ public class MainActivity extends AppCompatActivity {
         newBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dv.startNew();
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("New Drawing");
+                dialog.setMessage("Start new drawing (you will lose the current drawing)?");
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Dv.startNew();
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
             }
         });
 
     }
 
+    public void paintClicked(View view){
+
+        ImageButton imgView = (ImageButton)view;
+        String color = view.getTag().toString();
+        Dv.setColor(color);
+        Dv.setErase(false);
+        Dv.setBrushSize(Dv.getLastBrushSize());
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+        currPaint = (ImageButton)view;
+    }
+
     public void showDialog(String tool) {
 
+        final String toolSelected = tool;
         final Dialog brushDialog = new Dialog(this);
         brushDialog.setContentView(R.layout.brush_chooser);
-
-        if(tool.equals("brush")){
-        brushDialog.setTitle("Brush Size: ");
-        }else {
-            brushDialog.setTitle("Eraser Size");
-        }
 
         ImageButton smallBtn = (ImageButton)brushDialog.findViewById(R.id.small_brush);
         ImageButton mediumBtn = (ImageButton)brushDialog.findViewById(R.id.medium_brush);
         ImageButton largeBtn = (ImageButton)brushDialog.findViewById(R.id.large_brush);
 
-        smallBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dv.setBrushSize(smallbrush);
-                Dv.setLastBrushSize(smallbrush);
-                Dv.setErase(false);
-                brushDialog.dismiss();
-            }
-        });
-        mediumBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dv.setBrushSize(mediumbrush);
-                Dv.setLastBrushSize(mediumbrush);
-                Dv.setErase(false);
-                brushDialog.dismiss();
-            }
-        });
-        largeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dv.setBrushSize(largebrush);
-                Dv.setLastBrushSize(largebrush);
-                Dv.setErase(false);
-                brushDialog.dismiss();
-            }
-        });
+        if(tool.equals("brush")){
 
-        brushDialog.show();
+            brushDialog.setTitle("Brush Size: ");
+            smallBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(smallbrush);
+                    Dv.setLastBrushSize(smallbrush);
+                    brushDialog.dismiss();
+                }
+            });
+            mediumBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(mediumbrush);
+                    Dv.setLastBrushSize(mediumbrush);
+                    brushDialog.dismiss();
+                }
+            });
+            largeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(largebrush);
+                    Dv.setLastBrushSize(largebrush);
+                    brushDialog.dismiss();
+                }
+            });
+
+            brushDialog.show();
+
+
+        }else {
+            brushDialog.setTitle("Eraser Size");
+
+            smallBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(smallbrush);
+                    Dv.setLastBrushSize(smallbrush);
+                    brushDialog.dismiss();
+                }
+            });
+            mediumBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(mediumbrush);
+                    Dv.setLastBrushSize(mediumbrush);
+                    brushDialog.dismiss();
+                }
+            });
+            largeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dv.setErase(false);
+                    //Dv.setColor("#FFFFFF");
+                    Dv.setBrushSize(largebrush);
+                    Dv.setLastBrushSize(largebrush);
+                    brushDialog.dismiss();
+                }
+            });
+
+            brushDialog.show();
+        }
+
     }
 }
